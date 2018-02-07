@@ -27,7 +27,7 @@ import Survey from './containers/Survey/';
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
-const localeList = ['ar', 'de', 'en-us', 'es', 'fr', 'fr-ca', 'it', 'pt', 'ru', 'sv', 'zh-tw'];
+const localeList = ['ar', 'de', 'en-US', 'es', 'fr', 'fr-CA', 'it', 'pt', 'ru', 'sv', 'zh-TW'];
 
 function getPromise(fetchFunc, ...extraParams) {
     return new Promise((resolve, reject) => {
@@ -36,13 +36,13 @@ function getPromise(fetchFunc, ...extraParams) {
 }
 
 function getLocaleWhiteList(_locale) {
-    if (localeList.indexOf(_locale.toLowerCase()) < 0) {
+    if (localeList.indexOf(_locale) < 0) {
         // handle language code for default value
         const _langCode = _locale.split('-')[0];
         if (['ar', 'de', 'es', 'fr', 'it', 'pt', 'ru', 'sv'].indexOf(_langCode) >= 0) {
             return _langCode;
         }
-        return 'en-us';
+        return 'en-US';
     }
     return _locale;
 }
@@ -52,9 +52,9 @@ function i18nSetting(resolve, reject, locale) {
     .use(XHR)
     .init({
         lng: locale,
-        lowerCaseLng: true,
+        // lowerCaseLng: true,
         whitelist: localeList,
-        fallbackLng: 'en-us',
+        fallbackLng: 'en-US',
         debug: false,
         ns: 'translation',
         backend: {
